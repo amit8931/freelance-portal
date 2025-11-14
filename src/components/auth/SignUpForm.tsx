@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+// Adjust these imports for your icon paths!
 import { ChevronLeftIcon, EyeIcon, EyeCloseIcon } from "../../icons";
 import Label from "../form/Label";
-import Input from "../form/input/InputField";
+import InputField from "../form/input/InputField";
 import Checkbox from "../form/input/Checkbox";
 
-// API stubs with TypeScript types
+// API stubs, now using their arguments to avoid unused TS warnings
 async function checkEmailExists(email: string): Promise<boolean> {
-  // Call backend API here
+  // Simulate API call; log email for demonstration
+  console.log("Checking email:", email);
   return false;
 }
 async function suggestUsernames(name: string): Promise<string[]> {
+  // Simulate username suggestion based on name
   return [`${name}`, `${name}_dev`, `${name}01`];
 }
 async function checkUsernameUnique(username: string): Promise<boolean> {
+  // Simulate uniqueness check; log username for demonstration
+  console.log("Checking username:", username);
   return true;
 }
-async function submitSignUp(formData: {
+type SignUpFormData = {
   fname: string;
   lname: string;
   email: string;
@@ -24,7 +29,11 @@ async function submitSignUp(formData: {
   username: string;
   accountType: string;
   ageConfirmed: boolean;
-}): Promise<{ success: boolean }> {
+};
+// Using the parameter to avoid ts6133 warning
+async function submitSignUp(formData: SignUpFormData): Promise<{ success: boolean }> {
+  // Simulate submission; log data for demonstration
+  console.log("Submitting form data:", formData);
   return { success: true };
 }
 
@@ -155,24 +164,24 @@ export default function SignUpForm() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
                 <Label>First Name<span className="text-error-500">*</span></Label>
-                <Input type="text" value={fname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFname(e.target.value)} placeholder="Enter your first name" />
+                <InputField type="text" value={fname} onChange={e => setFname(e.target.value)} placeholder="Enter your first name" />
               </div>
               <div>
                 <Label>Last Name<span className="text-error-500">*</span></Label>
-                <Input type="text" value={lname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLname(e.target.value)} placeholder="Enter your last name" />
+                <InputField type="text" value={lname} onChange={e => setLname(e.target.value)} placeholder="Enter your last name" />
               </div>
             </div>
             <div>
               <Label>Email<span className="text-error-500">*</span></Label>
-              <Input type="email" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} placeholder="Enter your email" />
+              <InputField type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" />
             </div>
             <div>
               <Label>Password<span className="text-error-500">*</span></Label>
               <div className="relative">
-                <Input
+                <InputField
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                   placeholder="Enter your password"
                 />
                 <span
@@ -210,10 +219,10 @@ export default function SignUpForm() {
                 </button>
               ))}
             </div>
-            <Input
+            <InputField
               type="text"
               value={username}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+              onChange={e => setUsername(e.target.value)}
               placeholder="Or create your own"
             />
             {usernameError && <p className="text-error-500">{usernameError}</p>}
@@ -226,11 +235,11 @@ export default function SignUpForm() {
             <Label>Account Type</Label>
             <div className="flex gap-4">
               <label>
-                <input type="radio" value="freelancer" checked={accountType === "freelancer"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAccountType(e.target.value)} />
+                <input type="radio" value="freelancer" checked={accountType === "freelancer"} onChange={e => setAccountType(e.target.value)} />
                 <span className="ml-1">I want to Earn Money</span>
               </label>
               <label>
-                <input type="radio" value="client" checked={accountType === "client"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAccountType(e.target.value)} />
+                <input type="radio" value="client" checked={accountType === "client"} onChange={e => setAccountType(e.target.value)} />
                 <span className="ml-1">I want to Hire</span>
               </label>
             </div>

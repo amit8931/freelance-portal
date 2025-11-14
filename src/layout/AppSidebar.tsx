@@ -42,9 +42,9 @@ const navItems: NavItem[] = [
     path: "/profile",
   },
   {
-    name: "Forms",
+    name: "Category Manager",
     icon: <ListIcon />,
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+    subItems: [{ name: "Manage Categories", path: "/categories", pro: false }],
   },
   {
     name: "Tables",
@@ -88,6 +88,7 @@ const othersItems: NavItem[] = [
     subItems: [
       { name: "Sign In", path: "/signin", pro: false },
       { name: "Sign Up", path: "/signup", pro: false },
+      { name: "Sign Up", path: "/resetpassword", pro: false },
     ],
   },
 ];
