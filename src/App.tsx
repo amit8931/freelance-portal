@@ -18,6 +18,7 @@ import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
+import UserManagement from "./pages/UserManagement/UserManagement";
 
 export default function App() {
   return (
@@ -26,11 +27,14 @@ export default function App() {
         <ScrollToTop />
         <Routes>
           {/* Dashboard Layout */}
-          <Route index path="/" element={<SignUp />} />
-          <Route element={<AppLayout />}>
+             <Route element={<AppLayout />}>
+           
             
 
             {/* Others Page */}
+             
+             <Route index path="/" element={<Home />} />
+            <Route path="/user-management" element={<UserManagement />} />
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/blank" element={<Blank />} />
