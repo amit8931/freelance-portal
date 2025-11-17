@@ -3,16 +3,16 @@ import ComponentCard from "../../components/common/ComponentCard";
 import PageMeta from "../../components/common/PageMeta";
 import BasicTableOne from "../../components/tables/BasicTables/BasicTableOne";
 
-export default function BasicTables() {
+export default function FeeManager() {
   return (
     <>
       <PageMeta
-        title="React.js Basic Tables Dashboard | TailAdmin - Next.js Admin Dashboard Template"
-        description="This is React.js Basic Tables Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
+        title="Fee Manager | Edit Commission & Membership Rate"
+        description="Manage and edit commission and membership rates from the Fee Manager table view."
       />
-      <PageBreadcrumb pageTitle="Basic Tables" />
+      <PageBreadcrumb pageTitle="Fee Manager" />
       <div className="space-y-6">
-        <ComponentCard title="Basic Table 1">
+        <ComponentCard title="Edit Commission & Membership Rate">
           <BasicTableOne />
         </ComponentCard>
       </div>

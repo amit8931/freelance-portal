@@ -47,9 +47,9 @@ const navItems: NavItem[] = [
     subItems: [{ name: "Manage Categories", path: "/categories", pro: false }],
   },
   {
-    name: "Tables",
+    name: "Fee Manager",
     icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+    subItems: [{ name: "Fee Manager", path: "/fee-manager", pro: false }],
   },
   {
     name: "Pages",

@@ -1,222 +1,122 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "../../ui/table";
+import { useState, useEffect } from "react";
 
-import Badge from "../../ui/badge/Badge";
-
-interface Order {
+type FeeRow = {
   id: number;
-  user: {
-    image: string;
-    name: string;
-    role: string;
-  };
-  projectName: string;
-  team: {
-    images: string[];
-  };
-  status: string;
-  budget: string;
-}
+  name: string;
+  rate: string;
+  commission: string;
+};
 
-// Define the table data using the interface
-const tableData: Order[] = [
-  {
-    id: 1,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Lindsey Curtis",
-      role: "Web Designer",
-    },
-    projectName: "Agency Website",
-    team: {
-      images: [
-        "/images/user/user-22.jpg",
-        "/images/user/user-23.jpg",
-        "/images/user/user-24.jpg",
-      ],
-    },
-    budget: "3.9K",
-    status: "Active",
-  },
-  {
-    id: 2,
-    user: {
-      image: "/images/user/user-18.jpg",
-      name: "Kaiya George",
-      role: "Project Manager",
-    },
-    projectName: "Technology",
-    team: {
-      images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    },
-    budget: "24.9K",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "Content Writing",
-    },
-    projectName: "Blog Writing",
-    team: {
-      images: ["/images/user/user-27.jpg"],
-    },
-    budget: "12.7K",
-    status: "Active",
-  },
-  {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "Digital Marketer",
-    },
-    projectName: "Social Media",
-    team: {
-      images: [
-        "/images/user/user-28.jpg",
-        "/images/user/user-29.jpg",
-        "/images/user/user-30.jpg",
-      ],
-    },
-    budget: "2.8K",
-    status: "Cancel",
-  },
-  {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "Front-end Developer",
-    },
-    projectName: "Website",
-    team: {
-      images: [
-        "/images/user/user-31.jpg",
-        "/images/user/user-32.jpg",
-        "/images/user/user-33.jpg",
-      ],
-    },
-    budget: "4.5K",
-    status: "Active",
-  },
+const initialData: FeeRow[] = [
+  { id: 1, name: "Gold Membership", rate: "1200", commission: "10%" },
+  { id: 2, name: "Silver Membership", rate: "800", commission: "8%" },
 ];
 
-export default function BasicTableOne() {
-  return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      <div className="max-w-full overflow-x-auto">
-        <Table>
-          {/* Table Header */}
-          <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
-            <TableRow>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                User
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Project Name
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Team
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Status
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Budget
-              </TableCell>
-            </TableRow>
-          </TableHeader>
+function EditModal({
+  open,
+  row,
+  onSave,
+  onClose,
+}: {
+  open: boolean;
+  row: FeeRow | null;
+  onSave: (updated: FeeRow) => void;
+  onClose: () => void;
+}) {
+  const [rate, setRate] = useState("");
+  const [commission, setCommission] = useState("");
 
-          {/* Table Body */}
-          <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-            {tableData.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell className="px-5 py-4 sm:px-6 text-start">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 overflow-hidden rounded-full">
-                      <img
-                        width={40}
-                        height={40}
-                        src={order.user.image}
-                        alt={order.user.name}
-                      />
-                    </div>
-                    <div>
-                      <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                        {order.user.name}
-                      </span>
-                      <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                        {order.user.role}
-                      </span>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {order.projectName}
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  <div className="flex -space-x-2">
-                    {order.team.images.map((teamImage, index) => (
-                      <div
-                        key={index}
-                        className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                      >
-                        <img
-                          width={24}
-                          height={24}
-                          src={teamImage}
-                          alt={`Team member ${index + 1}`}
-                          className="w-full size-6"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  <Badge
-                    size="sm"
-                    color={
-                      order.status === "Active"
-                        ? "success"
-                        : order.status === "Pending"
-                        ? "warning"
-                        : "error"
-                    }
-                  >
-                    {order.status}
-                  </Badge>
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                  {order.budget}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+  useEffect(() => {
+    setRate(row?.rate ?? "");
+    setCommission(row?.commission ?? "");
+  }, [row]);
+
+  if (!open || !row) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+      <div className="bg-white rounded-xl shadow-xl p-8 min-w-[320px] w-full max-w-md animate-fade-in">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Edit {row.name}</h2>
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-1">Rate</label>
+          <input
+            type="text"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            value={rate}
+            onChange={e => setRate(e.target.value)}
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 mb-1">Commission</label>
+          <input
+            type="text"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            value={commission}
+            onChange={e => setCommission(e.target.value)}
+          />
+        </div>
+        <div className="flex justify-end gap-2">
+          <button
+            className="px-4 py-2 rounded-md bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+            onClick={() => onSave({ ...row, rate, commission })}
+          >
+            Save
+          </button>
+        </div>
       </div>
     </div>
+  );
+}
+
+export default function BasicTableOne() {
+  const [data, setData] = useState<FeeRow[]>(initialData);
+  const [selected, setSelected] = useState<FeeRow | null>(null);
+
+  const handleSave = (updated: FeeRow) => {
+    setData(data.map(d => (d.id === updated.id ? updated : d)));
+    setSelected(null);
+  };
+
+  return (
+    <>
+      <table className="min-w-full bg-white shadow rounded-lg overflow-hidden">
+        <thead>
+          <tr className="bg-blue-50 text-gray-700 uppercase tracking-wider text-sm">
+            <th className="px-6 py-3 text-left">Name</th>
+            <th className="px-6 py-3 text-left">Rate</th>
+            <th className="px-6 py-3 text-left">Commission</th>
+            <th className="px-6 py-3 text-left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(row => (
+            <tr key={row.id} className="border-b hover:bg-blue-50 group">
+              <td className="px-6 py-4">{row.name}</td>
+              <td className="px-6 py-4">{row.rate}</td>
+              <td className="px-6 py-4">{row.commission}</td>
+              <td className="px-6 py-4">
+                <button
+                  onClick={() => setSelected(row)}
+                  className="bg-blue-600 hover:bg-blue-700 transition text-white px-4 py-1 rounded-lg text-sm font-medium shadow group-hover:scale-105"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <EditModal
+        open={!!selected}
+        row={selected}
+        onSave={handleSave}
+        onClose={() => setSelected(null)}
+      />
+    </>
   );
 }

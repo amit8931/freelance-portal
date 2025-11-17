@@ -13,7 +13,7 @@ import Buttons from "./pages/UiElements/Buttons";
 import LineChart from "./pages/Charts/LineChart";
 import BarChart from "./pages/Charts/BarChart";
 import Calendar from "./pages/Calendar";
-import BasicTables from "./pages/Tables/BasicTables";
+import FeeMamager from "./pages/FeeManager/FeeManager";
 import ManageCategories from "./pages/Forms/ManageCategories";
 import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
@@ -40,7 +40,7 @@ export default function App() {
             <Route path="/categories" element={<ManageCategories />} />
 
             {/* Tables */}
-            <Route path="/basic-tables" element={<BasicTables />} />
+            <Route path="/fee-manager" element={<FeeMamager />} />
 
             {/* Ui Elements */}
             <Route path="/alerts" element={<Alerts />} />
