@@ -10,16 +10,25 @@ import Alerts from "./pages/UiElements/Alerts";
 import Badges from "./pages/UiElements/Badges";
 import Avatars from "./pages/UiElements/Avatars";
 import Buttons from "./pages/UiElements/Buttons";
-import LineChart from "./pages/Charts/LineChart";
-import BarChart from "./pages/Charts/BarChart";
+// import LineChart from "./pages/Charts/LineChart";
+// import BarChart from "./pages/Charts/BarChart";
 import Calendar from "./pages/Calendar";
 import FeeMamager from "./pages/FeeManager/FeeManager";
 import ManageCategories from "./pages/Forms/ManageCategories";
-import Blank from "./pages/Blank";
+import EscrowManager from "./pages/EscrowManager";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import UserManagement from "./pages/UserManagement/UserManagement";
+import SubscriptionPlans from "./components/sections/SubscriptionPlans";
+import CmsEditor from "./components/sections/CmsEditor";
+import CmsTerms from "./components/sections/CmsTerms";
+import CmsPrivacy from "./components/sections/CmsPrivacy";
+import CmsFaqs from "./components/sections/CmsFaqs";
+import CmsBlog from "./components/sections/CmsBlog";
+import DisputeCenter from "./components/sections/DisputeCenter";
+import EmailCenter from "./components/sections/EmailCenter";
+
 
 export default function App() {
   return (
@@ -38,7 +47,7 @@ export default function App() {
             <Route path="/user-management" element={<UserManagement />} />
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/calendar" element={<Calendar />} />
-            <Route path="/blank" element={<Blank />} />
+            <Route path="/escrow-manager" element={<EscrowManager />} />
 
             {/* Forms */}
             <Route path="/categories" element={<ManageCategories />} />
@@ -55,8 +64,18 @@ export default function App() {
             <Route path="/videos" element={<Videos />} />
 
             {/* Charts */}
-            <Route path="/line-chart" element={<LineChart />} />
-            <Route path="/bar-chart" element={<BarChart />} />
+          
+
+            // Add these new admin section routes:
+            <Route path="/components/sections/subscription-plans" element={<SubscriptionPlans />} />
+            <Route path="/components/sections/cms-editor" element={<CmsEditor />} />
+            <Route path="/components/sections/cms-terms" element={<CmsTerms />} />
+            <Route path="/components/sections/cms-privacy" element={<CmsPrivacy />} />
+            <Route path="/components/sections/cms-faqs" element={<CmsFaqs />} />
+            <Route path="/components/sections/cms-blog" element={<CmsBlog />} />
+            <Route path="/components/sections/dispute-center" element={<DisputeCenter />} />
+            <Route path="/components/sections/email-center" element={<EmailCenter />} />
+
           </Route>
 
           {/* Auth Layout */}

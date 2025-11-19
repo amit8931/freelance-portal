@@ -1,0 +1,78 @@
+import { useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
+import PageBreadcrumb from "../common/PageBreadCrumb";
+import PageMeta from "../common/PageMeta";
+
+export default function CmsTerms() {
+
+  const editorRef = useRef<any>(null);
+  const [saving, setSaving] = useState(false);
+  const initialContent = "<p>Edit your <strong>Terms & Conditions</strong> using rich formatting tools powered by TinyMCE.</p>";
+
+
+  // Save handler (simulate API save and feedback)
+  const handleSave = () => {
+    setSaving(true);
+    const content = editorRef.current ? editorRef.current.getContent() : initialContent;
+    setTimeout(() => {
+      setSaving(false);
+      alert("Terms & Conditions have been saved!\n\n" + content);
+    }, 1200);
+  };
+
+  return (
+    <div>
+      <PageMeta
+        title="Terms & Conditions | Admin Dashboard"
+        description="Edit Terms & Conditions content."
+      />
+      <PageBreadcrumb pageTitle="Terms & Conditions" />
+      <div className="min-h-screen rounded-2xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-white/[0.03]">
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
+          Terms & Conditions Editor
+        </h2>
+        <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm mb-8">
+          <div>
+            <label htmlFor="terms-editor" className="block mb-3 font-medium text-gray-700 dark:text-gray-200">
+              Terms & Conditions Content
+            </label>
+            <Editor
+              id="terms-editor"
+              onInit={(_, editor) => (editorRef.current = editor)}
+              initialValue={initialContent}
+              init={{
+                height: 400,
+                menubar: false,
+                plugins: [
+                  'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview',
+                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                  'insertdatetime', 'media', 'table', 'help', 'wordcount'
+                ],
+                toolbar:
+                  'undo redo | formatselect | bold italic underline | \
+                  alignleft aligncenter alignright alignjustify | bullist numlist | \
+                  link table code fullscreen',
+                skin: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide',
+                content_css: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default',
+              }}
+            />
+          </div>
+          <div className="flex justify-end mt-5">
+            <button
+              className={`px-8 py-2 bg-blue-600 text-white rounded-lg font-medium shadow transition
+                ${saving ? "opacity-70 cursor-wait" : "hover:bg-blue-700"}`}
+              onClick={handleSave}
+              disabled={saving}
+            >
+              {saving ? "Saving..." : "Save Changes"}
+            </button>
+          </div>
+        </div>
+        <div className="text-gray-500 dark:text-gray-400">
+          Edit or update the Terms & Conditions using full rich text formatting.
+          All changes will be applied site-wide for users and contracts.
+        </div>
+      </div>
+    </div>
+  );
+}

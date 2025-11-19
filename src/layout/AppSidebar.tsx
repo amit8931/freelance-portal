@@ -10,7 +10,6 @@ import {
   HorizontaLDots,
   ListIcon,
   PageIcon,
-  PieChartIcon,
   PlugInIcon,
   TableIcon,
   UserCircleIcon,
@@ -58,22 +57,45 @@ const navItems: NavItem[] = [
     subItems: [{ name: "Fee Manager", path: "/fee-manager", pro: false }],
   },
   {
-    name: "Pages",
+    name: "Escrow Management",
     icon: <PageIcon />,
     subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
+      { name: "Escrow Manager", path: "/escrow-manager", pro: false },
     ],
   },
 ];
 
 const othersItems: NavItem[] = [
   {
-    icon: <PieChartIcon />,
-    name: "Charts",
+    icon: <TableIcon />, // Or another that matches subscription theme
+    name: "Subscription",
     subItems: [
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
+      { name: "Plans", path: "/components/sections/subscription-plans", pro: false },
+    ],
+  },
+  {
+    icon: <PageIcon />,
+    name: "CMS Editor",
+    subItems: [
+      { name: "Editor Dashboard", path: "/components/sections/cms-editor", pro: false },
+      { name: "Terms & Conditions", path: "/components/sections/cms-terms", pro: false },
+      { name: "Privacy Policy", path: "/components/sections/cms-privacy", pro: false },
+      { name: "FAQs", path: "/components/sections/cms-faqs", pro: false },
+      { name: "Blog Management", path: "/components/sections/cms-blog", pro: false },
+    ],
+  },
+  {
+    icon: <BoxCubeIcon />,
+    name: "Dispute Center",
+    subItems: [
+      { name: "Cases & Refunds", path: "/components/sections/dispute-center", pro: false },
+    ],
+  },
+  {
+    icon: <PlugInIcon />,
+    name: "Email Center",
+    subItems: [
+      { name: "Campaigns & Alerts", path: "/components/sections/email-center", pro: false },
     ],
   },
   {
